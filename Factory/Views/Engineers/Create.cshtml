@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+
+<h2>Add an Engineer</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.Label("Add an Machine To This Engineer: ")
+  @Html.DropDownList("MachineId", (SelectList)ViewBag.MachineId, " ")
+
+  @Html.Label("Add a Location To This Engineer: ")
+  @Html.DropDownList("LocationId", (SelectList)ViewBag.LocationId, " ")
+
+  <input type="submit" value="Add Engineer" />
+}
+
+<p>@Html.ActionLink("Engineer List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
