@@ -59,5 +59,65 @@ namespace Factory.Controllers
       ViewBag.MachineCount = _db.EngineerLocationMachine.Where(join => join.EngineerId == id).Where(join => join.MachineId != null).Count();
       return View(engineer);  
     }
+
+    public ActionResult Edit(int id)
+    {
+      Engineer model = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(model);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Engineer engineer)
+    {
+      _db.Entry(engineer).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = engineer.EngineerId });
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View (thisEngineer);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      _db.Engineers.Remove(thisEngineer);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddMachine(int id)
+    {
+      Engineer model = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+      return View(model);
+    }
+    
+    [HttpPost]
+    public ActionResult AddMachine(Engineer engineer, int machineId)
+    {
+      _db.EngineerLocationMachine.Add(new EngineerLocationMachine(){EngineerId = engineer.EngineerId, MachineId = machineId});
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = engineer.EngineerId});
+    }
+    
+    public ActionResult AddLocation(int id)
+    {
+      Engineer model = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "Name");
+      return View(model);
+    }
+    
+    [HttpPost]
+    public ActionResult AddLocation(Engineer engineer, int locationId)
+    {
+      _db.EngineerLocationMachine.Add(new EngineerLocationMachine(){EngineerId = engineer.EngineerId, LocationId = locationId});
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = engineer.EngineerId});
+    }
   }
 }
+  
