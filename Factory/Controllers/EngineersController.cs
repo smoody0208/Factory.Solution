@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using RecordCollection.Models;
+using Factory.Models;
 
 namespace Factory.Controllers
 {
-  public class EngineersController : Controllers
+  public class EngineersController : Controller
   {
     private readonly FactoryContext _db;
     
