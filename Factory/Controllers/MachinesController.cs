@@ -128,7 +128,7 @@ namespace Factory.Controllers
     public ActionResult Status(int statusId)
     {
       var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == statusId);
-      thisMachine.Status = true;
+      thisMachine.Complete = true;
       _db.Entry(thisMachine).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
