@@ -17,9 +17,13 @@ namespace Factory.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string name)
     {
       IQueryable<Machine> machineQuery = _db.Machines;
+      {
+        Regex search = new Regex(name, RegexOptions.IgnoreCase);
+        machineQuery = machineQuery.Where(machines => search.IsMatch(machines.Name));
+      }
       IEnumerable<Machine> machineList = machineQuery.ToList().OrderBy(machines => machines.Name);
       return View(machineList);
     }

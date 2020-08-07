@@ -17,9 +17,14 @@ namespace Factory.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string name)
     {
       IQueryable<Engineer> engineerQuery = _db.Engineers;
+      if (!string.IsNullOrEmpty(name))
+      {
+        Regex search = new Regex(name, RegexOptions.IgnoreCase);
+        engineerQuery = engineerQuery.Where(engineers => search.IsMatch(engineers.Name));
+      }
       IEnumerable<Engineer> engineerList = engineerQuery.ToList().OrderBy(engineers => engineers.Name);
       return View(engineerList);
     }

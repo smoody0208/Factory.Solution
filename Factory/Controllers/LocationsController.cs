@@ -17,9 +17,13 @@ namespace Factory.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string name)
     {
       IQueryable<Location> locationQuery = _db.Locations;
+      {
+        Regex search = new Regex(name, RegexOptions.IgnoreCase);
+        locationQuery = locationQuery.Where(locations => search.IsMatch(locations.Name));
+      }
       IEnumerable<Location> locationList = locationQuery.ToList().OrderBy(locations => locations.Name);
       return View(locationList);
     }
