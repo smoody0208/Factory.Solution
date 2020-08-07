@@ -19,8 +19,9 @@ namespace Factory.Controllers
 
     public ActionResult Index()
     {
-      List<Course> model = _db.Courses.ToList();
-      return View(model);
+      IQueryable<Engineer> engineerQuery = _db.Engineers;
+      IEnumerable<Engineer> engineerList = engineerQuery.ToList().OrderBy(engineers => engineers.Name);
+      return View(engineerList);
     }
 
   }
