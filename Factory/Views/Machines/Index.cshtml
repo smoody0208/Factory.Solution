@@ -14,6 +14,14 @@
 @foreach(Machine machine in Model)
 {
   <li>@Html.ActionLink($"{machine.Name}", "Details", new {id = machine.MachineId})</li>
+  @if(@machine.Status == true)
+  {
+    <p>completed</p>
+  }
+  else
+  {
+    <p>not complete</p>
+  }
 }
 </ul>
 

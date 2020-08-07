@@ -16,6 +16,9 @@
   @Html.LabelFor(model => model.Description)
   @Html.TextBoxFor(model => model.Description)
 
+  @Html.LabelFor(model => model.Status)
+  @Html.CheckBox("Status", false)
+
   <input type="submit" value="Save" />
 }
 

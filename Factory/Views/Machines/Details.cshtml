@@ -10,6 +10,15 @@
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 <h4>Description: @Html.DisplayFor(model => model.Description)</h4>
 
+@if(@Model.Status == true)
+{
+  <h4>Status: Complete</h4>
+}
+else
+{
+  <h4>Status: Not Complete</h4>
+}
+
 @if(ViewBag.LocationCount == 0)
 {
   <p>There are no locations associated with this machine.</p>

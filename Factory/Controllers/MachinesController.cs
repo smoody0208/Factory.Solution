@@ -123,6 +123,16 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new {id = machine.MachineId});
     }
+
+    [HttpPost]
+    public ActionResult Status(int statusId)
+    {
+      var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == statusId);
+      thisMachine.Status = true;
+      _db.Entry(thisMachine).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
     
   }
 }
