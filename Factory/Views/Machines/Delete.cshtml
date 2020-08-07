@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+
+<h3>Are you sure you want to delete @Html.DisplayFor(model => model.Name)?</h3>
+
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Confirm Delete" />
+}
+
+<p>@Html.ActionLink("Back Without Deleting", "Details", new { id = Model.MachineId })</p>
+<p>@Html.ActionLink("Machine List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
