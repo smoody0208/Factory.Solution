@@ -20,6 +20,7 @@ namespace Factory.Controllers
     public ActionResult Index(string name)
     {
       IQueryable<Machine> machineQuery = _db.Machines;
+      if (!string.IsNullOrEmpty(name))
       {
         Regex search = new Regex(name, RegexOptions.IgnoreCase);
         machineQuery = machineQuery.Where(machines => search.IsMatch(machines.Name));
