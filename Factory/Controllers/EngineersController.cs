@@ -24,5 +24,27 @@ namespace Factory.Controllers
       return View(engineerList);
     }
 
+    public ActionResult Create()
+    {
+      ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "Name");
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Engineer engineers, int MachineId, int LocationId)
+    {
+      _db.Engineers.Add(engineers);
+      if (MachineId != 0)
+      {
+        _db.EngineerLocationMachine.Add(new EngineerLocationMachine() { MachineId = MachineId, EngineerId = engineers.EngineerId });
+      }
+      if (LocationId != 0)
+      {
+        _db.EngineerLocationMachine.Add(new EngineerLocationMachine() { LocationId = LocationId, EngineerId = engineers.EngineerId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = engineers.EngineerId });
+    }
   }
 }
