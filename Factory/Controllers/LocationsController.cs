@@ -41,7 +41,7 @@ namespace Factory.Controllers
       }
       if (EngineerId != 0)
       {
-        _db.EngineerLocationMachine.Add(new EngineerLocationMachine() { EngineerId = EngineerId, LocationId = locations.LocationsId });
+        _db.EngineerLocationMachine.Add(new EngineerLocationMachine() { EngineerId = EngineerId, LocationId = locations.LocationId });
       }
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = locations.LocationId });
@@ -106,7 +106,7 @@ namespace Factory.Controllers
     
     public ActionResult AddEngineer(int id)
     {
-      Engineer model = _db.Locations.FirstOrDefault(location => location.LocationId == id);
+      Location model = _db.Locations.FirstOrDefault(location => location.LocationId == id);
       ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
       return View(model);
     }
@@ -120,4 +120,3 @@ namespace Factory.Controllers
     }
   }
 }
-  

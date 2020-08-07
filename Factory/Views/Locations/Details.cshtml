@@ -1,0 +1,52 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+@model Factory.Models.Location;
+
+<h2>Location Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(ViewBag.MachineCount == 0)
+{
+  <p>There are no machines associated with this location.</p>
+}
+else
+{
+  <h4>Machines:</h4>
+  <ul>
+  @foreach(EngineerLocationMachine join in Model.EngineersMachines)
+  {
+    @if (join.MachineId != null)
+    {
+      <li>@Html.ActionLink($"{join.Machine.Name}", "Details", "Machines", new { id = @join.Machine.MachineId})</li>
+    }
+  }
+  </ul>
+}
+
+@if(ViewBag.EngineerCount == 0)
+{
+  <p>There are no engineers associated with this location.</p>
+}
+else
+{
+  <h4>Engineers:</h4>
+  <ul>
+  @foreach(EngineerLocationMachine join in Model.EngineersMachines)
+  {
+    @if (join.EngineerId != null)
+    {
+      <li>@Html.ActionLink($"{join.Engineer.Name}", "Details", "Engineers", new { id = @join.Engineer.EngineerId})</li>
+    }
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to Locations", "Index")</p>
+<p>@Html.ActionLink("Edit Location", "Edit", new { id = Model.LocationId })</p>
+<p>@Html.ActionLink("Delete Location", "Delete", new { id = Model.LocationId })</p>
+<p>@Html.ActionLink("Add Engineer", "AddEngineer", new { id = Model.LocationId })</p>
+<p>@Html.ActionLink("Add Machine", "AddMachine", new { id = Model.LocationId })</p>
