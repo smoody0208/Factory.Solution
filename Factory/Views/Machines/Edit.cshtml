@@ -19,6 +19,9 @@
   @Html.LabelFor(model => model.Complete)
   @Html.CheckBox("Complete", false)
 
+  @Html.LabelFor(model => model.InspectionDate)
+  @Html.TextBoxFor(model => model.InspectionDate, new {@type = "date"})
+
   <input type="submit" value="Save" />
 }
 
