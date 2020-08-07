@@ -10,5 +10,6 @@ namespace Factory.Models
     public DbSet<EngineerLocationMachine> EngineerLocationMachine { get; set; }
 
     public FactoryContext(DbContextOptions options) : base(options) { }
+    
   }
 }  
