@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Artist
+
+<h2>Add Machine to @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+
+  @Html.Label("Select Machine:")
+  @Html.DropDownList("MachineId")
+
+  <input type="submit" value="Add Machine" />
+}
+
+<p>@Html.ActionLink("Back Without Saving", "Details", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Add Location", "AddLocation", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Engineer List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
