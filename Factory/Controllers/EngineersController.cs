@@ -46,5 +46,18 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = engineers.EngineerId });
     }
+
+    public ActionResult Details(int id)
+    {
+      Engineer engineer = _db.Engineers
+        .Include(engineers => engineers.LocationsMachines)
+        .ThenInclude(join => join.Location)
+        .Include(engineers => engineers.LocationsMachines)
+        .ThenInclude(join => join.Machine)
+        .First(engineers => engineers.EngineerId == id);
+      ViewBag.LocationCount = _db.EngineerLocationMachine.Where(join => join.EngineerId == id).Where(join => join.LocationId != null).Count();
+      ViewBag.MachineCount = _db.EngineerLocationMachine.Where(join => join.EngineerId == id).Where(join => join.MachineId != null).Count();
+      return View(engineer);  
+    }
   }
 }
