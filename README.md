@@ -98,6 +98,7 @@ CREATE TABLE `machines` (
 * Clone the GitHub repository by running `git clone https://github.com/smoody0208/Factory.Solution.git` in the terminal
 * Navigate to the newly created `Factory.Solution` folder
 * Navigate to the `Factory` subfolder and run `dotnet restore`
+* Next type `dotnet ef database update` to use the Migration file to build the database schema
 * Run `dotnet build` to build the app and `dotnet run` to run it
 * The web app will now be available on `http://localhost:5000/` in your browser
 
